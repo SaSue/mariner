@@ -1,111 +1,78 @@
-# =========================
-# 1) BUILDER: build + .deb
-# =========================
-FROM debian:bullseye-slim AS builder
+# syntax=docker/dockerfile:1.6
 
-ENV NODE_OPTIONS="--dns-result-order=ipv4first --openssl-legacy-provider" \
-    PATH=$PATH:/root/.local/bin \
-    PIP_DEFAULT_TIMEOUT=600 \
-    PIP_TIMEOUT=600 \
-    PIP_RETRIES=100
+########################
+# 1) FRONTEND BUILDER
+########################
+FROM --platform=$BUILDPLATFORM node:20-bookworm AS frontend
+WORKDIR /src/frontend
 
+# Falls du npm nutzt:
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+
+COPY frontend/ ./
+# Falls Webpack/OpenSSL3 noch knallt, TEMPORÄR aktivieren:
+# ENV NODE_OPTIONS=--openssl-legacy-provider
+RUN npm run build
+
+
+########################
+# 2) BACKEND BUILsDER
+########################
+FROM --platform=$BUILDPLATFORM python:3.12-slim-bookworm AS backend
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1 \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=true
+
+WORKDIR /src
+
+# Build-Tools nur für Build-Stage (wenn Wheels kompiliert werden müssen)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    sudo dpkg-dev debhelper dh-virtualenv \
-    python3 python3-venv python3-dev \
-    build-essential libffi-dev zlib1g-dev \
-    libssl-dev libpcap-dev libcap-dev libxslt-dev libxml2-dev \
-    libavcodec-dev libavformat-dev libswscale-dev libdrm-dev libasound2-dev \
-    libwebp-dev libjpeg62-turbo-dev \
-    liblcms2-2 libopenjp2-7-dev libtiff5-dev libxcb1-dev libfreetype6-dev \
-    liblapack3 libatlas-base-dev liblapack-dev \
-    curl ca-certificates git \
- && rm -rf /var/lib/apt/lists/*
+      build-essential gcc \
+    && rm -rf /var/lib/apt/lists/*
 
-# Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN pip install --no-cache-dir "poetry>=1.8"
 
-# Node 18 + Yarn classic
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
- && apt-get update && apt-get install -y --no-install-recommends nodejs \
- && rm -rf /var/lib/apt/lists/* \
- && corepack disable || true \
- && npm i -g yarn@1.22.22
+# Nur Dependencies (Cache Layer)
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --only main --no-root
 
-WORKDIR /build
-COPY . /build/
+# Quellcode
+COPY . .
 
-# Frontend build
-WORKDIR /build/frontend
-RUN yarn config set network-timeout 600000 \
- && yarn config set registry https://registry.npmjs.org \
- && yarn install --frozen-lockfile \
- && yarn build
-
-# Python + deb build
-WORKDIR /build
-RUN test -f poetry.lock
-RUN poetry config virtualenvs.create false
-RUN poetry install --only main --no-interaction --no-ansi
-RUN poetry build
-RUN poetry self add poetry-plugin-export
-RUN poetry export -f requirements.txt --without-hashes -o /tmp/requirements.txt
-
-WORKDIR /build/dist
-RUN dpkg-buildpackage -us -uc
-
-# Collect deb(s)
-RUN mkdir -p /out \
- && find /build -maxdepth 3 -type f -name "*.deb" -print -exec cp -v {} /out/ \;
+# Wenn dein Projekt ein Poetry-Package ist (meistens ja)
+RUN poetry install --only main
 
 
-# =========================
-# 2) RUNTIME: install .deb
-# =========================
-FROM debian:bullseye-slim AS runtime
-
-ENV NODE_OPTIONS=--dns-result-order=ipv4first \
+########################
+# 3) RUNTIME
+########################
+FROM --platform=$TARGETPLATFORM python:3.12-slim-bookworm AS runtime
+ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Minimal runtime deps (no -dev!)
+WORKDIR /app
+
+# Runtime libs: minimal halten; bei ImportError ergänzen
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl \
-    gcc libc6-dev libcap-dev python3-dev \
-    python3 python3-venv python3-distutils \
-    libpcap0.8 \
-    libssl1.1 \
-    libxml2 libxslt1.1 \
-    libjpeg62-turbo libwebp6 libtiff5 libpng16-16 libfreetype6 zlib1g \
-    libatlas3-base liblapack3 libgfortran5 \
-    libavcodec58 libavformat58 libavutil56 libswscale5 libswresample3 \
-    libdrm2 libxcb1 libxau6 libasound2 \
- && rm -rf /var/lib/apt/lists/*
+      ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /out/*.deb /tmp/
-COPY --from=builder /tmp/requirements.txt /tmp/requirements.txt
+# venv + app übernehmen
+COPY --from=backend /src/.venv /app/.venv
+COPY --from=backend /src /app
 
-RUN set -eux; \
-    dpkg -i /tmp/mariner3d_*.deb || true; \
-    dpkg -s mariner3d || true; \
-    apt-get update; \
-    apt-get -y -f install; \
-    dpkg -s mariner3d; 
+# Frontend-Assets übernehmen (Pfad/Output ggf. anpassen)
+# CRA -> build, Vite -> dist
+COPY --from=frontend /src/frontend/build /app/frontend/build
 
-RUN /opt/venvs/mariner3d/bin/python -m pip install -r /tmp/requirements.txt
+ENV PATH="/app/.venv/bin:$PATH"
 
-EXPOSE 5000
+EXPOSE 8000
 
-# Start mariner from /usr/bin/mariner
-CMD ["mariner"]
-
-# =========================
-# 3) ARTIFACTS: export .deb
-# =========================
-FROM scratch AS artifacts
-COPY --from=builder /out/ /out/
-
-
-
-
-
-
-
+# Startkommando anpassen:
+# Beispiele:
+# CMD ["waitress-serve","--listen=0.0.0.0:8000","mariner.app:app"]
+# oder:
+CMD ["python", "-m", "mariner"]
