@@ -5,7 +5,7 @@
 ########################
 FROM --platform=$BUILDPLATFORM node:20-bookworm AS frontend
 WORKDIR /src/frontend
-ENV NODE_OPTIONS=--openssl-legacy-provider
+# ENV NODE_OPTIONS=--openssl-legacy-provider
 # Yarn Lockfile für reproduzierbare Builds
 COPY frontend/package.json frontend/yarn.lock ./
 RUN corepack enable && yarn install --frozen-lockfile
@@ -13,7 +13,7 @@ RUN corepack enable && yarn install --frozen-lockfile
 COPY frontend/ ./
 # falls Webpack/OpenSSL knallt, TEMP:
 # ENV NODE_OPTIONS=--openssl-legacy-provider
-RUN yarn build && ls -la && ls -la /src/frontend
+RUN NODE_OPTIONS=--openssl-legacy-provider yarn build
 
 ########################
 # 2) BACKEND BUILsDER
