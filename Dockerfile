@@ -6,15 +6,14 @@
 FROM --platform=$BUILDPLATFORM node:20-bookworm AS frontend
 WORKDIR /src/frontend
 
-# Falls du npm nutzt:
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci
+# Yarn Lockfile für reproduzierbare Builds
+COPY frontend/package.json frontend/yarn.lock ./
+RUN corepack enable && yarn install --frozen-lockfile
 
 COPY frontend/ ./
-# Falls Webpack/OpenSSL3 noch knallt, TEMPORÄR aktivieren:
+# falls Webpack/OpenSSL knallt, TEMP:
 # ENV NODE_OPTIONS=--openssl-legacy-provider
-RUN npm run build
-
+RUN yarn build
 
 ########################
 # 2) BACKEND BUILsDER
