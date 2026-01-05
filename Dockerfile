@@ -13,7 +13,7 @@ RUN corepack enable && yarn install --frozen-lockfile
 COPY frontend/ ./
 # falls Webpack/OpenSSL knallt, TEMP:
 # ENV NODE_OPTIONS=--openssl-legacy-provider
-RUN yarn build
+RUN yarn build && ls -la && ls -la /src/frontend
 
 ########################
 # 2) BACKEND BUILsDER
