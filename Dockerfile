@@ -59,7 +59,7 @@ COPY --from=backend /src /app
 
 # Frontend-Assets übernehmen (Pfad/Output ggf. anpassen)
 # CRA -> build, Vite -> dist
-COPY --from=frontend /src/frontend/build /app/frontend/build
+COPY --from=frontend /src/frontend/dist /app/frontend/dist
 
 ENV PATH="/app/.venv/bin:$PATH"
 
