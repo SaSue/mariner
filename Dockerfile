@@ -34,14 +34,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip install --no-cache-dir "poetry>=1.8"
 
 # Nur Dependencies (Cache Layer)
-COPY pyproject.toml poetry.lock ./
-RUN poetry lock
-RUN poetry install --only main --no-root
-
-# Quellcode
 COPY . .
-
-# Wenn dein Projekt ein Poetry-Package ist (meistens ja)
+RUN poetry lock
 RUN poetry install --only main
 
 
