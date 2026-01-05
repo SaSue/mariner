@@ -3,7 +3,7 @@
 # =========================
 FROM debian:bullseye-slim AS builder
 
-ENV NODE_OPTIONS=--dns-result-order=ipv4first \
+ENV NODE_OPTIONS=--dns-result-order=ipv4first --openssl-legacy-provider \
     PATH=$PATH:/root/.local/bin \
     PIP_DEFAULT_TIMEOUT=600 \
     PIP_TIMEOUT=600 \
