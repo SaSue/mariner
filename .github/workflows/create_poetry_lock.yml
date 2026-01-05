@@ -1,0 +1,61 @@
+name: Update poetry.lock
+
+on:
+  workflow_dispatch:
+  schedule:
+    # jeden Montag 06:15 UTC (07:15 Berlin im Winter)
+    - cron: "15 6 * * 1"
+  push:
+    paths:
+      - "pyproject.toml"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: poetry-lock-update
+  cancel-in-progress: true
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install "poetry>=1.8"
+
+      - name: Configure Poetry
+        run: |
+          poetry --version
+          poetry config virtualenvs.create false --local || true
+
+      - name: Regenerate poetry.lock
+        run: |
+          rm -f poetry.lock
+          poetry lock
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/update-poetry-lock
+          delete-branch: true
+          title: "chore: regenerate poetry.lock (Python 3.12)"
+          commit-message: "chore: regenerate poetry.lock (Python 3.12)"
+          body: |
+            This PR regenerates `poetry.lock` using Python 3.12 via GitHub Actions.
+            Trigger: ${{ github.event_name }}
+          labels: |
+            dependencies
+            automation
