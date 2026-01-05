@@ -5,7 +5,7 @@
 ########################
 FROM --platform=$BUILDPLATFORM node:20-bookworm AS frontend
 WORKDIR /src/frontend
-
+ENV NODE_OPTIONS=--openssl-legacy-provider
 # Yarn Lockfile für reproduzierbare Builds
 COPY frontend/package.json frontend/yarn.lock ./
 RUN corepack enable && yarn install --frozen-lockfile
