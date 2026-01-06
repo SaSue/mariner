@@ -57,14 +57,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # venv + app übernehmen
-COPY --from=backend /src/.venv /app/.venv
-COPY --from=backend /src /app
+COPY --from=backend /app/.venv /app/.venv
+COPY --from=backend /app /app
+ENV PATH="/app/.venv/bin:$PATH"
 
 # Frontend-Assets übernehmen (Pfad/Output ggf. anpassen)
 # CRA -> build, Vite -> dist
 COPY --from=frontend /src/frontend/dist /app/frontend/dist
-
-ENV PATH="/app/.venv/bin:$PATH"
 
 # Startkommando anpassen:
 # Beispiele:
