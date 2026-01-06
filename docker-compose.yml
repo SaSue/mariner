@@ -14,7 +14,10 @@ services:
 
     devices:
       - "/dev/serial0:/dev/ttyS0"
-
+      
+    group_add:
+      - dialout
+    
     volumes:
       - /mnt/usb:/mnt/usb_share
 #      - ./config.toml:/etc/mariner/config.toml:ro
