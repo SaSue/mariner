@@ -62,6 +62,120 @@ post <https://l9o.dev/posts/controlling-an-elegoo-mars-pro-remotely/>`__
 explains the setup end to end with pictures of the modifications done to an
 Elegoo Mars Pro.
 
+
+Docker / ARM64 Installation (Recommended for Raspberry Pi)
+----------------------------------------------------------
+
+This fork has been modernized to support **container-based deployment on ARM64
+systems**, such as Raspberry Pi (64-bit), instead of legacy ``.deb`` packages.
+
+**If you are not running Firmware 4.4.3, then DO NOT install Mariner from this fork.
+It is unlikely to work.**
+
+For older firmware versions, use the original Mariner releases.
+
+Supported Runtime Environment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- **Architecture:** ARM64 (``aarch64``)
+- **OS:** Debian Bookworm or compatible
+- **Container Runtime:** Docker + Docker Compose
+- **Python:** 3.12 (inside container)
+- **Node.js:** 20 (build-time only)
+- **Frontend:** Webpack (legacy build, OpenSSL workaround applied)
+- **Backend Server:** Flask + Waitress
+
+Docker Image (Prebuilt)
+~~~~~~~~~~~~~~~~~~~~~~
+
+Docker images are automatically built and published via **GitHub Actions**
+to **GitHub Container Registry (GHCR)**.
+
+Image name::
+
+  ghcr.io/sasue/mariner:latest
+
+Tagged releases are also available (e.g. ``v0.2.0``).
+
+Docker Compose Example (Raspberry Pi)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following setup is known to work reliably on Raspberry Pi with
+serial-over-UART communication. Pls. ensure to setup the virutal USB Device as described in the original documentation.
+
+Create a docker-compose.yml with the following content and start your container with 
+
+docker compose up -d
+
+::
+
+  version: "3.8"
+
+  services:
+    mariner:
+      image: ghcr.io/sasue/mariner:latest
+      container_name: mariner
+      restart: unless-stopped
+      init: true
+
+      command: ["mariner"]
+
+      ports:
+        - "5000:5000"
+
+      devices:
+        - "/dev/serial0:/dev/ttyS0"
+
+      group_add:
+        - dialout
+
+      volumes:
+        - /mnt/usb:/mnt/usb_share
+        - ./config.toml:/etc/mariner/config.toml:ro
+
+      networks:
+        - proxy-net
+
+  networks:
+    proxy-net:
+      external: true
+
+Serial Device Mapping Notes
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+On Raspberry Pi, the following mapping has proven to be **the most reliable**::
+
+  /dev/serial0 → /dev/ttyS0
+
+If it works reliably — **do not change it**.
+
+If you have an other Serial Device at your Raspi, only change /dev/serial0 to the correct value.
+
+Building the Image Manually (Optional)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Local builds are **not recommended on Raspberry Pi** due to long build times.
+If required, build on a more powerful host::
+
+  docker buildx build \
+    --platform linux/arm64 \
+    -t mariner:arm64 \
+    --load .
+
+Notes on Modernization
+~~~~~~~~~~~~~~~~~~~~~
+
+This fork includes several internal improvements:
+
+- Python upgraded to **3.12**
+- Fully containerized runtime (no system-wide installs)
+- Deterministic dependency locking via Poetry
+- ARM64-first deployment
+- Hardened frontend build against network timeouts
+- Temporary Webpack OpenSSL legacy workaround
+
+These changes are **transparent to end users** and do not alter printer behavior.
+
 .. |CI| image:: https://github.com/luizribeiro/mariner/workflows/CI/badge.svg
    :target: https://github.com/luizribeiro/mariner/actions/workflows/ci.yaml
 .. |docs| image:: https://readthedocs.org/projects/mariner/badge/?version=latest
