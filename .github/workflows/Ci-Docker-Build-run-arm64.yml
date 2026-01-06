@@ -1,0 +1,53 @@
+name: CI - Docker build & run (arm64)
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image (arm64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/arm64
+          load: true
+          tags: mariner:ci-arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test – container starts
+        run: |
+          set -e
+
+          echo "Starting container..."
+          docker run -d --name mariner-test \
+            -p 5000:5000 \
+            mariner:ci-arm64
+
+          echo "Waiting for startup..."
+          sleep 10
+
+          echo "Checking container state..."
+          docker ps | grep mariner-test
+
+          echo "Checking logs..."
+          docker logs mariner-test --tail=50
+
+          echo "Stopping container..."
+          docker stop mariner-test
