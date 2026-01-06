@@ -1039,14 +1039,14 @@ files = [
 
 [[package]]
 name = "pyexpect"
-version = "1.0.21"
+version = "1.0.22"
 description = "Python expectaton library"
 optional = false
 python-versions = "*"
 groups = ["dev"]
 files = [
-    {file = "pyexpect-1.0.21-py2-none-any.whl", hash = "sha256:1653b1a34b420e891d104f4d5ebac6ba313aec5bbf0feb0700c73f96a1384f8b"},
-    {file = "pyexpect-1.0.21.tar.gz", hash = "sha256:96e900d6af928a94c2a75b4935ddda44872c218121d0467c549ae19e7608a9a2"},
+    {file = "pyexpect-1.0.22-py3-none-any.whl", hash = "sha256:712ead7ae971e799263f0088c01e39b5d2d5741d3567cbd9fc8dcadaf25fb0f2"},
+    {file = "pyexpect-1.0.22.tar.gz", hash = "sha256:659351e7ee8923b42de8a774fabfc806acf07377d7fd19f2ea4412ef8f619c6a"},
 ]
 
 [[package]]
@@ -2005,4 +2005,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "d039e00ca286800a80538edb79df9cc3bdf48c91b0b2c039542fd34aa53619f4"
+content-hash = "6588421bc9c61e47469d8e6f11c714e0dd7e0e9e7f92093f6940bea3b3cbf721"
