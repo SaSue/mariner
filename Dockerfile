@@ -24,7 +24,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=true
 
-WORKDIR /src
+WORKDIR /app
 
 # Build-Tools nur für Build-Stage (wenn Wheels kompiliert werden müssen)
 RUN apt-get update && apt-get install -y --no-install-recommends \
