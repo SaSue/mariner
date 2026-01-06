@@ -3,7 +3,7 @@
 ########################
 # 1) FRONTEND BUILDER
 ########################
-FROM --platform=$BUILDPLATFORM node:20-bookworm AS frontend
+FROM --platform=$BUILDPLATFORM node:25-bookworm AS frontend
 WORKDIR /src/frontend
 
 ENV NODE_OPTIONS=--dns-result-order=ipv4first
