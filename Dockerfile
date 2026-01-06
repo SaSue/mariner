@@ -32,7 +32,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir "poetry>=1.8"
-
+# 1) nur lock + deps (cachebar)
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --only main --no-root
 # Nur Dependencies (Cache Layer)
 COPY . .
 RUN poetry lock
@@ -62,8 +64,6 @@ COPY --from=backend /src /app
 COPY --from=frontend /src/frontend/dist /app/frontend/dist
 
 ENV PATH="/app/.venv/bin:$PATH"
-
-EXPOSE 8000
 
 # Startkommando anpassen:
 # Beispiele:
