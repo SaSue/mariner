@@ -23,7 +23,7 @@ RUN NODE_OPTIONS=--openssl-legacy-provider yarn build
 ########################
 # 2) BACKEND BUILDER
 ########################
-FROM --platform=$BUILDPLATFORM python:3.12-slim-bookworm AS backend
+FROM --platform=$BUILDPLATFORM python:3.14-slim-bookworm AS backend
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1 \
     POETRY_NO_INTERACTION=1 \
@@ -48,7 +48,7 @@ RUN poetry install --only main
 ########################
 # 3) RUNTIME
 ########################
-FROM --platform=$TARGETPLATFORM python:3.12-slim-bookworm AS runtime
+FROM --platform=$TARGETPLATFORM python:3.14-slim-bookworm AS runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
