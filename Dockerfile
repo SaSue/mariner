@@ -5,18 +5,23 @@
 ########################
 FROM --platform=$BUILDPLATFORM node:20-bookworm AS frontend
 WORKDIR /src/frontend
-# ENV NODE_OPTIONS=--openssl-legacy-provider
-# Yarn Lockfile für reproduzierbare Builds
+
+ENV NODE_OPTIONS=--dns-result-order=ipv4first
+
 COPY frontend/package.json frontend/yarn.lock ./
-RUN corepack enable && yarn install --frozen-lockfile
+
+RUN --mount=type=cache,target=/root/.cache/yarn \
+    corepack enable \
+ && yarn config set network-timeout 600000 -g \
+ && yarn config set registry https://registry.npmjs.org/ -g \
+ && yarn install --frozen-lockfile --non-interactive
 
 COPY frontend/ ./
-# falls Webpack/OpenSSL knallt, TEMP:
-# ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN NODE_OPTIONS=--openssl-legacy-provider yarn build
 
+
 ########################
-# 2) BACKEND BUILsDER
+# 2) BACKEND BUILDER
 ########################
 FROM --platform=$BUILDPLATFORM python:3.12-slim-bookworm AS backend
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
