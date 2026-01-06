@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mariner:
-    build: .
+    image: ghcr.io/sasue/mariner:latest
     container_name: mariner
     restart: unless-stopped
     init: true
@@ -20,7 +20,6 @@ services:
     
     volumes:
       - /mnt/usb:/mnt/usb_share
-#      - ./config.toml:/etc/mariner/config.toml:ro
 
     networks:
       - proxy-net
