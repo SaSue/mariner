@@ -391,18 +391,18 @@ pyflakes = ">=2.3.0,<2.4.0"
 
 [[package]]
 name = "flask"
-version = "2.0.1"
+version = "2.1.3"
 description = "A simple framework for building complex web applications."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "Flask-2.0.1-py3-none-any.whl", hash = "sha256:a6209ca15eb63fc9385f38e452704113d679511d9574d09b2cf9183ae7d20dc9"},
-    {file = "Flask-2.0.1.tar.gz", hash = "sha256:1c4c257b1892aec1398784c63791cbaa43062f1f7aeb555c4da961b20ee68f55"},
+    {file = "Flask-2.1.3-py3-none-any.whl", hash = "sha256:9013281a7402ad527f8fd56375164f3aa021ecfaff89bfe3825346c24f87e04c"},
+    {file = "Flask-2.1.3.tar.gz", hash = "sha256:15972e5017df0575c3d6c090ba168b6db90259e620ac8d7ea813a396bad5b6cb"},
 ]
 
 [package.dependencies]
-click = ">=7.1.2"
+click = ">=8.0"
 itsdangerous = ">=2.0"
 Jinja2 = ">=3.0"
 Werkzeug = ">=2.0"
@@ -1039,14 +1039,14 @@ files = [
 
 [[package]]
 name = "pyexpect"
-version = "1.0.21"
+version = "1.0.22"
 description = "Python expectaton library"
 optional = false
 python-versions = "*"
 groups = ["dev"]
 files = [
-    {file = "pyexpect-1.0.21-py2-none-any.whl", hash = "sha256:1653b1a34b420e891d104f4d5ebac6ba313aec5bbf0feb0700c73f96a1384f8b"},
-    {file = "pyexpect-1.0.21.tar.gz", hash = "sha256:96e900d6af928a94c2a75b4935ddda44872c218121d0467c549ae19e7608a9a2"},
+    {file = "pyexpect-1.0.22-py3-none-any.whl", hash = "sha256:712ead7ae971e799263f0088c01e39b5d2d5741d3567cbd9fc8dcadaf25fb0f2"},
+    {file = "pyexpect-1.0.22.tar.gz", hash = "sha256:659351e7ee8923b42de8a774fabfc806acf07377d7fd19f2ea4412ef8f619c6a"},
 ]
 
 [[package]]
@@ -2005,4 +2005,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "e224d7d4b9bbc8881162a2bd44efac8b77cc6565bc8542be7eb6d51ec6e339b4"
+content-hash = "6588421bc9c61e47469d8e6f11c714e0dd7e0e9e7f92093f6940bea3b3cbf721"
