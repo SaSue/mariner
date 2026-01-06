@@ -105,7 +105,7 @@ serial-over-UART communication. Pls. ensure to setup the virutal USB Device as d
 
 Create a docker-compose.yml with the following content and start your container with 
 
-docker compose up -d
+  docker compose up -d
 
 ::
 
