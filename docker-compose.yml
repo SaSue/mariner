@@ -2,10 +2,10 @@ version: "3.8"
 
 services:
   mariner:
-    platform: linux/arm/v7
     build: .
     container_name: mariner
     restart: unless-stopped
+    init: true
 
     command: ["waitress-serve", "--listen=0.0.0.0:5000", "mariner.server.app:app"]
 
@@ -13,14 +13,20 @@ services:
       - "5000:5000"
 
     devices:
-      - "/dev/serial0:/dev/ttyS0"
+      - "/dev/serial0:/dev/serial0"
 
     volumes:
       - /mnt/usb:/mnt/usb_share
-      - ./config.toml:/etc/mariner/config.toml:ro
+#      - ./config.toml:/etc/mariner/config.toml:ro
 
     networks:
       - proxy-net
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   proxy-net:
