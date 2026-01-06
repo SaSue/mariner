@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  mariner:
+    platform: linux/arm/v7
+    build: .
+    container_name: mariner
+    restart: unless-stopped
+
+    command: ["/usr/bin/mariner"]
+
+    ports:
+      - "5000:5000"
+
+    devices:
+      - "/dev/serial0:/dev/ttyS0"
+
+    volumes:
+      - /mnt/usb:/mnt/usb_share
+      - ./config.toml:/etc/mariner/config.toml:ro
+
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: true
