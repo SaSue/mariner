@@ -69,4 +69,5 @@ EXPOSE 8000
 # Beispiele:
 # CMD ["waitress-serve","--listen=0.0.0.0:8000","mariner.app:app"]
 # oder:
-CMD ["python", "-m", "mariner"]
+EXPOSE 5000
+CMD ["waitress-serve", "--listen=0.0.0.0:5000", "mariner.server.app:app"]
