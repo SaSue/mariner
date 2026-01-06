@@ -7,7 +7,7 @@ services:
     container_name: mariner
     restart: unless-stopped
 
-    command: ["/usr/bin/mariner"]
+    command: ["waitress-serve", "--listen=0.0.0.0:5000", "mariner.server.app:app"]
 
     ports:
       - "5000:5000"
