@@ -391,18 +391,18 @@ pyflakes = ">=2.3.0,<2.4.0"
 
 [[package]]
 name = "flask"
-version = "2.0.1"
+version = "2.1.3"
 description = "A simple framework for building complex web applications."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "Flask-2.0.1-py3-none-any.whl", hash = "sha256:a6209ca15eb63fc9385f38e452704113d679511d9574d09b2cf9183ae7d20dc9"},
-    {file = "Flask-2.0.1.tar.gz", hash = "sha256:1c4c257b1892aec1398784c63791cbaa43062f1f7aeb555c4da961b20ee68f55"},
+    {file = "Flask-2.1.3-py3-none-any.whl", hash = "sha256:9013281a7402ad527f8fd56375164f3aa021ecfaff89bfe3825346c24f87e04c"},
+    {file = "Flask-2.1.3.tar.gz", hash = "sha256:15972e5017df0575c3d6c090ba168b6db90259e620ac8d7ea813a396bad5b6cb"},
 ]
 
 [package.dependencies]
-click = ">=7.1.2"
+click = ">=8.0"
 itsdangerous = ">=2.0"
 Jinja2 = ">=3.0"
 Werkzeug = ">=2.0"
@@ -504,6 +504,21 @@ files = [
     {file = "imagesize-1.4.1-py2.py3-none-any.whl", hash = "sha256:0d8d18d08f840c19d0ee7ca1fd82490fdc3729b7ac93f49870406ddde8ef8d8b"},
     {file = "imagesize-1.4.1.tar.gz", hash = "sha256:69150444affb9cb0d5cc5a92b3676f0b2fb7cd9ae39e947a5e11a36b4497cd4a"},
 ]
+
+[[package]]
+name = "intervaltree"
+version = "3.2.1"
+description = "Editable interval tree data structure for Python 2 and 3"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7.18"
+groups = ["dev"]
+files = [
+    {file = "intervaltree-3.2.1-py2.py3-none-any.whl", hash = "sha256:a8a8381bbd35d48ceebee932c77ffc988492d22fb1d27d0ba1d74a7694eb8f0b"},
+    {file = "intervaltree-3.2.1.tar.gz", hash = "sha256:f3f7e8baeb7dd75b9f7a6d33cf3ec10025984a8e66e3016d537e52130c73cfe2"},
+]
+
+[package.dependencies]
+sortedcontainers = "*"
 
 [[package]]
 name = "itsdangerous"
@@ -1039,14 +1054,14 @@ files = [
 
 [[package]]
 name = "pyexpect"
-version = "1.0.21"
+version = "1.0.22"
 description = "Python expectaton library"
 optional = false
 python-versions = "*"
 groups = ["dev"]
 files = [
-    {file = "pyexpect-1.0.21-py2-none-any.whl", hash = "sha256:1653b1a34b420e891d104f4d5ebac6ba313aec5bbf0feb0700c73f96a1384f8b"},
-    {file = "pyexpect-1.0.21.tar.gz", hash = "sha256:96e900d6af928a94c2a75b4935ddda44872c218121d0467c549ae19e7608a9a2"},
+    {file = "pyexpect-1.0.22-py3-none-any.whl", hash = "sha256:712ead7ae971e799263f0088c01e39b5d2d5741d3567cbd9fc8dcadaf25fb0f2"},
+    {file = "pyexpect-1.0.22.tar.gz", hash = "sha256:659351e7ee8923b42de8a774fabfc806acf07377d7fd19f2ea4412ef8f619c6a"},
 ]
 
 [[package]]
@@ -1102,26 +1117,27 @@ files = [
 
 [[package]]
 name = "pyre-check"
-version = "0.9.3"
+version = "0.9.15"
 description = "A performant type checker for Python"
 optional = false
 python-versions = ">=3.6"
 groups = ["dev"]
 files = [
-    {file = "pyre-check-0.9.3.tar.gz", hash = "sha256:d5c03de101610d534eaf3d7b654702d91b95505209886feed211a30ded789daa"},
-    {file = "pyre_check-0.9.3-py3-none-macosx_10_11_x86_64.whl", hash = "sha256:989a82f1f76dd572da46e33bde34e56e7949f272df32f96d1f397241f42ebb13"},
-    {file = "pyre_check-0.9.3-py3-none-manylinux1_x86_64.whl", hash = "sha256:ed000307bcc7999b6e651bd8fa3d7716d6b3cc272855bf677643438f77ff54c1"},
+    {file = "pyre-check-0.9.15.tar.gz", hash = "sha256:48e93c9675ba0ff28ac7776969534c2d97cb19e3ba73ce88ae92206fe99e8bfe"},
+    {file = "pyre_check-0.9.15-py3-none-macosx_10_11_x86_64.whl", hash = "sha256:2d1a62cea859a6d0fd17ceda2fe0fdd51b8d0c5c0a0594ae72a42aea2bc2f46d"},
+    {file = "pyre_check-0.9.15-py3-none-manylinux1_x86_64.whl", hash = "sha256:5458250974ac553f7bbfe850af350fda79255c60769017094c1f31700d5419e4"},
 ]
 
 [package.dependencies]
 async-generator = "*"
-click = "*"
+click = ">=8.0"
 dataclasses-json = "*"
-libcst = ">=0.3.6"
+intervaltree = "*"
+libcst = "*"
 psutil = "*"
 pyre-extensions = "*"
-pywatchman = "*"
 tabulate = "*"
+testslide = ">=2.7.0"
 typing-extensions = "*"
 
 [[package]]
@@ -1218,24 +1234,6 @@ pylint = ["pylint (>=2.5.0)"]
 rope = ["rope (>0.10.5)"]
 test = ["coverage", "flaky", "matplotlib", "mock", "numpy", "pandas", "pylint (>=2.5.0)", "pyqt5 ; python_version >= \"3\"", "pytest", "pytest-cov", "versioneer"]
 yapf = ["yapf"]
-
-[[package]]
-name = "pywatchman"
-version = "3.0.0"
-description = "Watchman client for Python"
-optional = false
-python-versions = ">=3.8"
-groups = ["dev"]
-files = [
-    {file = "pywatchman-3.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:91f521ed0b4e64433ccf8f57bdd9ce7da8722cd1acc54a5e9f715acd86bf3ec5"},
-    {file = "pywatchman-3.0.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:b652304404b47fc5ca0b9b29f70334b0455c155425934dcb8365e66da2c543d3"},
-    {file = "pywatchman-3.0.0-cp312-cp312-macosx_10_13_universal2.whl", hash = "sha256:4f69c49a72e81f1d24733ff5c9dda451404c542edb1efafdb77fd43c7c1a8df9"},
-    {file = "pywatchman-3.0.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:c15484b7d20c007f5b3c7781dddf5acb2c8a8f6440925e3e512b7e194b05dda9"},
-    {file = "pywatchman-3.0.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:79eac1371ba3f5e33a8a94438956380656dd66316225acc3cda42ca598008986"},
-    {file = "pywatchman-3.0.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:64875a9cc2a3e16402c2a267aa94ea755af8ff7e2bfeaf250d7e0285efdf98c0"},
-    {file = "pywatchman-3.0.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:302c04c71950c4e0fde17a593029b552ac0a9ada6b967ea0ca25701f47d7f254"},
-    {file = "pywatchman-3.0.0.tar.gz", hash = "sha256:efd32a17391a5872118c55041da71a20960e46ba4b73440c24efac287eea911e"},
-]
 
 [[package]]
 name = "pyyaml"
@@ -1542,6 +1540,18 @@ files = [
 ]
 
 [[package]]
+name = "sortedcontainers"
+version = "2.4.0"
+description = "Sorted Containers -- Sorted List, Sorted Dict, Sorted Set"
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "sortedcontainers-2.4.0-py2.py3-none-any.whl", hash = "sha256:a163dcaede0f1c021485e957a39245190e74249897e2ae4b2aa38595db237ee0"},
+    {file = "sortedcontainers-2.4.0.tar.gz", hash = "sha256:25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88"},
+]
+
+[[package]]
 name = "sphinx"
 version = "4.0.3"
 description = "Python documentation generator"
@@ -1712,6 +1722,25 @@ files = [
 widechars = ["wcwidth"]
 
 [[package]]
+name = "testslide"
+version = "2.7.1"
+description = "A test framework for Python that makes mocking and iterating over code with tests a breeze"
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "TestSlide-2.7.1.tar.gz", hash = "sha256:d25890d5c383f673fac44a5f9e2561b7118d04f29f2c2b3d4f549e6db94cb34d"},
+]
+
+[package.dependencies]
+psutil = ">=5.6.7"
+Pygments = ">=2.2.0"
+typeguard = "<3.0"
+
+[package.extras]
+build = ["black", "coverage", "coveralls", "flake8", "ipython", "isort (>=5.1,<6.0)", "mypy (==0.991)", "sphinx", "sphinx-autobuild", "sphinx-kr-theme", "twine"]
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -1785,6 +1814,22 @@ files = [
     {file = "typedstruct-0.1.0-py3-none-any.whl", hash = "sha256:6ae8e4e1680f6f65f937acbfe6e550fe4c8e67150eb708aeb4aa317b08f08da5"},
     {file = "typedstruct-0.1.0.tar.gz", hash = "sha256:5595230dc6b58a01572830689459307091d687123cf98d11398a359dddad032d"},
 ]
+
+[[package]]
+name = "typeguard"
+version = "2.13.3"
+description = "Run-time type checker for Python"
+optional = false
+python-versions = ">=3.5.3"
+groups = ["dev"]
+files = [
+    {file = "typeguard-2.13.3-py3-none-any.whl", hash = "sha256:5e3e3be01e887e7eafae5af63d1f36c849aaa94e3a0112097312aabfa16284f1"},
+    {file = "typeguard-2.13.3.tar.gz", hash = "sha256:00edaa8da3a133674796cf5ea87d9f4b4c367d77476e185e80251cc13dfbb8c4"},
+]
+
+[package.extras]
+doc = ["sphinx-autodoc-typehints (>=1.2.0)", "sphinx-rtd-theme"]
+test = ["mypy ; platform_python_implementation != \"PyPy\"", "pytest", "typing-extensions"]
 
 [[package]]
 name = "typing-extensions"
@@ -2005,4 +2050,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "e224d7d4b9bbc8881162a2bd44efac8b77cc6565bc8542be7eb6d51ec6e339b4"
+content-hash = "114aa337c39e7a125831ca030d3be54425df458554c8a1e82124b6d91726810e"
