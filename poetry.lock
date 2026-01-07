@@ -428,20 +428,20 @@ Flask = "*"
 
 [[package]]
 name = "flask-wtf"
-version = "0.15.1"
-description = "Simple integration of Flask and WTForms."
+version = "1.2.2"
+description = "Form rendering, validation, and CSRF protection for Flask with WTForms."
 optional = false
-python-versions = ">= 3.6"
+python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "Flask-WTF-0.15.1.tar.gz", hash = "sha256:ff177185f891302dc253437fe63081e7a46a4e99aca61dfe086fb23e54fff2dc"},
-    {file = "Flask_WTF-0.15.1-py2.py3-none-any.whl", hash = "sha256:6ff7af73458f182180906a37a783e290bdc8a3817fe4ad17227563137ca285bf"},
+    {file = "flask_wtf-1.2.2-py3-none-any.whl", hash = "sha256:e93160c5c5b6b571cf99300b6e01b72f9a101027cab1579901f8b10c5daf0b70"},
+    {file = "flask_wtf-1.2.2.tar.gz", hash = "sha256:79d2ee1e436cf570bccb7d916533fa18757a2f18c290accffab1b9a0b684666b"},
 ]
 
 [package.dependencies]
-Flask = "*"
+flask = "*"
 itsdangerous = "*"
-WTForms = "*"
+wtforms = "*"
 
 [package.extras]
 email = ["email-validator"]
@@ -2066,4 +2066,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "7cfd56a99ca56af6ecd81c6bdef66a8abbb50edcfe228a3e69400488fd5ae958"
+content-hash = "cef409dc6a055a548974eceb6501041d7a00d98d04edc520cdd76def382eaa71"
