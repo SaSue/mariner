@@ -1066,14 +1066,14 @@ files = [
 
 [[package]]
 name = "pyfakefs"
-version = "4.5.0"
-description = "pyfakefs implements a fake file system that mocks the Python file system modules."
+version = "6.0.0"
+description = "Implements a fake file system that mocks the Python file system modules."
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.10"
 groups = ["dev"]
 files = [
-    {file = "pyfakefs-4.5.0-py3-none-any.whl", hash = "sha256:46234fa2dbce8ffb693ec906638449342afe83e45fa832932351d5050048159b"},
-    {file = "pyfakefs-4.5.0.tar.gz", hash = "sha256:58b017b3437bbe97803a23755876c6d6aeb5aea37e52cec15e5d86b59c4c7295"},
+    {file = "pyfakefs-6.0.0-py3-none-any.whl", hash = "sha256:44ef5ab0294e7e623b8e56b4f2d8c9468b737d6e8641053063c43033d2c8c180"},
+    {file = "pyfakefs-6.0.0.tar.gz", hash = "sha256:059fd0b2174bfeed499ecb0a59bccff557f267cc6d885afc0e5b76e78b6d50da"},
 ]
 
 [[package]]
@@ -2050,4 +2050,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "7f5d7cbfbefc75d97d299ffd8fa96c7f6684efbc7b09c75b59211c58b9897fc6"
+content-hash = "6ffc6f8aade55ceb15210c6c6b653acf2d0ac2c1c47eaee2738e12565d0e41eb"
