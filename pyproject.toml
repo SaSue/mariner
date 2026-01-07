@@ -22,7 +22,7 @@ pyserial = "3.5"
 python = "^3.12"
 toml = "0.10.2"
 typedstruct = "0.1.0"
-waitress = "2.0.0"
+waitress = "3.0.2"
 whitenoise = "5.2.0"
 
 [tool.poetry.group.dev.dependencies]
