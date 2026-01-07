@@ -9,21 +9,30 @@ authors = [
 ]
 
 [tool.poetry.scripts]
-mariner = 'mariner.server:main'
+mariner = "mariner.server:main"
 
 [tool.poetry.dependencies]
-flask = "2.1.3"
+python = "^3.12"
+
+# Flask 2.3 stack (keep consistent)
+flask = "2.3.3"
 Werkzeug = "2.3.8"
-flask-caching = "1.11.1"
-Flask-WTF = "0.15.1"
+jinja2 = "3.1.4"
+itsdangerous = "2.1.2"
+click = "8.1.7"
+
+# Extensions compatible with Flask 2.3
+flask-caching = "2.1.0"
+Flask-WTF = "1.1.1"
+whitenoise = "6.6.0"
+
+# Project deps
 pypng = "0.20220715.0"
 pyre-extensions = "0.0.32"
 pyserial = "3.5"
-python = "^3.12"
 toml = "0.10.2"
 typedstruct = "0.1.0"
 waitress = "2.1.2"
-whitenoise = "5.3.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "25.12.0"
