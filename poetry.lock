@@ -77,6 +77,18 @@ colorama = ["colorama (>=0.4.3)"]
 d = ["aiohttp (>=3.3.2)", "aiohttp-cors"]
 
 [[package]]
+name = "cachelib"
+version = "0.13.0"
+description = "A collection of cache libraries in the same API interface."
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "cachelib-0.13.0-py3-none-any.whl", hash = "sha256:8c8019e53b6302967d4e8329a504acf75e7bc46130291d30188a6e4e58162516"},
+    {file = "cachelib-0.13.0.tar.gz", hash = "sha256:209d8996e3c57595bee274ff97116d1d73c4980b2fd9a34c7846cd07fd2e1a48"},
+]
+
+[[package]]
 name = "certifi"
 version = "2026.1.4"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -413,17 +425,18 @@ dotenv = ["python-dotenv"]
 
 [[package]]
 name = "flask-caching"
-version = "1.10.1"
-description = "Adds caching support to your Flask application"
+version = "2.3.1"
+description = "Adds caching support to Flask applications."
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "Flask-Caching-1.10.1.tar.gz", hash = "sha256:cf19b722fcebc2ba03e4ae7c55b532ed53f0cbf683ce36fafe5e881789a01c00"},
-    {file = "Flask_Caching-1.10.1-py3-none-any.whl", hash = "sha256:bcda8acbc7508e31e50f63e9b1ab83185b446f6b6318bd9dd1d45626fba2e903"},
+    {file = "Flask_Caching-2.3.1-py3-none-any.whl", hash = "sha256:d3efcf600e5925ea5a2fcb810f13b341ae984f5b52c00e9d9070392f3ca10761"},
+    {file = "flask_caching-2.3.1.tar.gz", hash = "sha256:65d7fd1b4eebf810f844de7de6258254b3248296ee429bdcb3f741bcbf7b98c9"},
 ]
 
 [package.dependencies]
+cachelib = ">=0.9.0"
 Flask = "*"
 
 [[package]]
@@ -2050,4 +2063,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "114aa337c39e7a125831ca030d3be54425df458554c8a1e82124b6d91726810e"
+content-hash = "690d7370835d319c78b69c2b8d92956a35b6f313aa63fae7e11bf64cf9c0abed"
