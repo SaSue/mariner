@@ -477,19 +477,20 @@ python-dateutil = ">=2.7"
 
 [[package]]
 name = "green"
-version = "3.2.6"
+version = "4.0.0"
 description = "Green is a clean, colorful, fast python test runner."
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 groups = ["dev"]
 files = [
-    {file = "green-3.2.6.tar.gz", hash = "sha256:e51d4ff6e6885942d944304fedc7440a8f87917aa09526beeecb31a0dae655b8"},
+    {file = "green-4.0.0.tar.gz", hash = "sha256:935296a0385a15866389412fa86b55dad95c7668eaa355b7e6db01c1352a480d"},
 ]
 
 [package.dependencies]
 colorama = "*"
-coverage = "*"
+coverage = {version = "*", extras = ["toml"]}
 lxml = "*"
+setuptools = "*"
 unidecode = "*"
 
 [[package]]
@@ -1936,4 +1937,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "ff9b20c6dc1b6f2a27042c7fc5d60a1f54efea50dd400a22fd2bfb901f2e998d"
+content-hash = "f9023cd5c2ee675cb00a3369e1214df97e012669f7ea63dcde77c12ac8708195"
