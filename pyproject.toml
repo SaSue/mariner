@@ -34,7 +34,7 @@ pyexpect = "1.0.22"
 pyfakefs = "6.0.0"
 pyre-check = "0.9.25"
 python-language-server = "0.36.2"
-sphinx = "7.3.7"
+sphinx = "8.2.3"
 sphinx-rtd-theme = "3.0.2"
 
 [build-system]
