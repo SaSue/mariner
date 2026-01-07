@@ -15,7 +15,7 @@
     "@babel/preset-typescript": "7.28.5",
     "@storybook/addon-actions": "6.3.4",
     "@storybook/addon-essentials": "6.5.16",
-    "@storybook/addon-links": "6.3.4",
+    "@storybook/addon-links": "6.5.16",
     "@storybook/addon-storyshots": "6.3.4",
     "@storybook/cli": "6.3.4",
     "@storybook/react": "6.3.4",
@@ -41,7 +41,7 @@
     "storybook-react-router": "1.0.8",
     "typescript": "4.3.5",
     "webpack": "5.104.1",
-    "webpack-cli": "4.7.2",
+    "webpack-cli": "4.10.0",
     "webpack-dev-server": "3.11.3"
   },
   "dependencies": {
@@ -51,7 +51,7 @@
     "nullthrows": "1.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-router-dom": "5.2.0",
+    "react-router-dom": "5.3.4",
     "utility-types": "3.11.0"
   },
   "jest": {
