@@ -17,6 +17,12 @@ updates:
       - dependency-name: "html-loader"
         update-types:
           - "version-update:semver-major"
+      - dependency-name: "jest"
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "@types/jest"
+        update-types:
+          - "version-update:semver-major"
 
   - package-ecosystem: "docker"
     directory: "/"
