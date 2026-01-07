@@ -1878,14 +1878,14 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "waitress"
-version = "2.0.0"
+version = "2.1.2"
 description = "Waitress WSGI server"
 optional = false
-python-versions = ">=3.6.0"
+python-versions = ">=3.7.0"
 groups = ["main"]
 files = [
-    {file = "waitress-2.0.0-py3-none-any.whl", hash = "sha256:29af5a53e9fb4e158f525367678b50053808ca6c21ba585754c77d790008c746"},
-    {file = "waitress-2.0.0.tar.gz", hash = "sha256:69e1f242c7f80273490d3403c3976f3ac3b26e289856936d1f620ed48f321897"},
+    {file = "waitress-2.1.2-py3-none-any.whl", hash = "sha256:7500c9625927c8ec60f54377d590f67b30c8e70ef4b8894214ac6e4cad233d2a"},
+    {file = "waitress-2.1.2.tar.gz", hash = "sha256:780a4082c5fbc0fde6a2fcfe5e26e6efc1e8f425730863c04085769781f51eba"},
 ]
 
 [package.extras]
@@ -1943,4 +1943,4 @@ email = ["email-validator"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "f9023cd5c2ee675cb00a3369e1214df97e012669f7ea63dcde77c12ac8708195"
+content-hash = "afcf2c87eecdfbb60a18224ff3faeaa9f317495e9e85de987d985a218b7decc2"
