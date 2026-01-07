@@ -13,7 +13,6 @@ updates:
     directory: "/frontend"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 2
     ignore:
       - dependency-name: "html-loader"
         update-types:
@@ -23,7 +22,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 5
     ignore:
       - dependency-name: "node"
         update-types:
@@ -36,4 +34,3 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    open-pull-requests-limit: 5
