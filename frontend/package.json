@@ -32,7 +32,7 @@
     "eslint": "7.30.0",
     "eslint-plugin-react": "7.37.5",
     "html-loader": "2.1.2",
-    "html-webpack-plugin": "5.6.5",
+    "html-webpack-plugin": "5.6.6",
     "jest": "27.5.1",
     "prettier": "3.7.4",
     "prettier-plugin-organize-imports": "4.3.0",
