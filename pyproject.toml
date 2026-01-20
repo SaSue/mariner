@@ -35,7 +35,7 @@ typedstruct = "0.1.0"
 waitress = "2.1.2"
 
 [tool.poetry.group.dev.dependencies]
-black = "25.12.0"
+black = "26.1.0"
 flake8 = "7.3.0"
 freezegun = "1.5.5"
 green = "4.0.0"
